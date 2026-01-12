@@ -22,7 +22,7 @@ export default function TasksPage() {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const { data } = await api.get('/tasks/my-tasks');
+      const { data } = await api.get('/hierarchy/tasks');
       setTasks(data);
     } catch (err) {
       console.error('Failed to fetch tasks', err);

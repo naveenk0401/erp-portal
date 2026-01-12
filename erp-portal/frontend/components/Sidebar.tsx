@@ -58,7 +58,7 @@ export default function Sidebar() {
     {
       title: 'Strategy & Growth',
       items: [
-        { name: 'OKRs', icon: GanttChart, href: '/okrs', roles: ['super_admin', 'dept_admin'] },
+        { name: 'OKRs', icon: GanttChart, href: '/okrs', roles: ['super_admin', 'department_head'] },
         { name: 'Financials', icon: TrendingUp, href: '/financials', roles: ['super_admin'] },
         { name: 'Reports', icon: BarChart3, href: '/reports', roles: ['super_admin'] },
       ]
@@ -66,35 +66,35 @@ export default function Sidebar() {
     {
       title: 'Work Engine',
       items: [
-        { name: 'Projects', icon: Layers, href: '/projects', roles: ['super_admin', 'dept_admin'] },
-        { name: 'Sprints', icon: Activity, href: '/sprints', roles: ['super_admin', 'dept_admin'] },
-        { name: 'Tasks', icon: CheckSquare, href: '/tasks', roles: ['super_admin', 'dept_admin', 'employee'] },
+        { name: 'Projects', icon: Layers, href: '/projects', roles: ['super_admin', 'department_head'] },
+        { name: 'Sprints', icon: Activity, href: '/sprints', roles: ['super_admin', 'department_head'] },
+        { name: 'Tasks', icon: CheckSquare, href: '/tasks', roles: ['super_admin', 'department_head', 'department_manager', 'team_lead', 'employee'] },
       ]
     },
     {
       title: 'HR Panel',
       items: [
-        { name: 'Onboarding', icon: UserPlus, href: '/hr/onboarding', roles: ['super_admin', 'dept_admin', 'employee'] },
-        { name: 'Approvals', icon: ClipboardCheck, href: '/hr/approvals', roles: ['super_admin', 'dept_admin'] },
-        { name: 'ID Card', icon: CreditCard, href: '/hr/id-card', roles: ['super_admin', 'dept_admin', 'employee'] },
+        { name: 'Onboarding', icon: UserPlus, href: '/hr/onboarding', roles: ['super_admin', 'department_head', 'employee'] },
+        { name: 'Approvals', icon: ClipboardCheck, href: '/hr/approvals', roles: ['super_admin', 'department_head'] },
+        { name: 'ID Card', icon: CreditCard, href: '/hr/id-card', roles: ['super_admin', 'department_head', 'employee'] },
       ]
     },
     {
       title: 'CRM Suite',
       items: [
-        { name: 'CRM Dashboard', icon: LayoutDashboard, href: '/crm/dashboard', roles: ['super_admin', 'dept_admin'] },
-        { name: 'Leads', icon: Users, href: '/crm/leads', roles: ['super_admin', 'dept_admin', 'employee'] },
-        { name: 'Deals', icon: TrendingUp, href: '/crm/deals', roles: ['super_admin', 'dept_admin'] },
+        { name: 'CRM Dashboard', icon: LayoutDashboard, href: '/crm/dashboard', roles: ['super_admin', 'department_head'] },
+        { name: 'Leads', icon: Users, href: '/crm/leads', roles: ['super_admin', 'department_head', 'employee'] },
+        { name: 'Deals', icon: TrendingUp, href: '/crm/deals', roles: ['super_admin', 'department_head'] },
       ]
     },
     {
       title: 'Human Capital',
       items: [
-        { name: 'Employees', icon: Users, href: '/users', roles: ['super_admin', 'dept_admin'] },
-        { name: 'Employee Analytics', icon: UserCheck, href: '/employee-analytics', roles: ['super_admin', 'dept_admin'] },
-        { name: 'HR Operations', icon: Briefcase, href: '/hr-ops', roles: ['super_admin', 'dept_admin'] },
+        { name: 'Employees', icon: Users, href: '/users', roles: ['super_admin', 'department_head'] },
+        { name: 'Employee Analytics', icon: UserCheck, href: '/employee-analytics', roles: ['super_admin', 'department_head'] },
+        { name: 'HR Operations', icon: Briefcase, href: '/hr-ops', roles: ['super_admin', 'department_head'] },
         { name: 'Payroll', icon: IndianRupee, href: '/salaries', roles: ['super_admin', 'accountant'] },
-        { name: 'Attendance', icon: Calendar, href: '/attendance', roles: ['super_admin', 'dept_admin', 'employee'] },
+        { name: 'Attendance', icon: Calendar, href: '/attendance', roles: ['super_admin', 'department_head', 'employee'] },
       ]
     },
     {
@@ -102,15 +102,15 @@ export default function Sidebar() {
       items: [
         { name: 'Rules Engine', icon: Cpu, href: '/rules', roles: ['super_admin'] },
         { name: 'Assets', icon: HardDrive, href: '/assets', roles: ['super_admin'] },
-        { name: 'Documents', icon: FileText, href: '/documents', roles: ['super_admin', 'dept_admin', 'employee'] },
-        { name: 'Wiki', icon: BookOpen, href: '/wiki', roles: ['super_admin', 'dept_admin', 'employee'] },
+        { name: 'Documents', icon: FileText, href: '/documents', roles: ['super_admin', 'department_head', 'employee'] },
+        { name: 'Wiki', icon: BookOpen, href: '/wiki', roles: ['super_admin', 'department_head', 'employee'] },
       ]
     },
     {
       title: 'System',
       items: [
         { name: 'Audit Logs', icon: History, href: '/audit-logs', roles: ['super_admin'] },
-        { name: 'Verify Service', icon: ShieldCheck, href: '/verify', roles: ['super_admin', 'dept_admin', 'employee'] },
+        { name: 'Verify Service', icon: ShieldCheck, href: '/verify', roles: ['super_admin', 'department_head', 'employee'] },
         { name: 'Settings', icon: Settings, href: '/settings', roles: ['super_admin'] },
       ]
     }
