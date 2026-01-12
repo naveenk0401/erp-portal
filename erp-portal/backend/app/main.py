@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.errors import erp_exception_handler, generic_exception_handler, ERPBaseException
-from app.api.v1 import copilot, insights, config, hr, hr_workflow, hr_api, ops_api, finance_api, strategy, content_api, approvals, dashboard, settings_api, admin_api, crm
+from app.api.v1 import copilot, insights, config, hr, hr_workflow, hr_api, ops_api, finance_api, strategy, content_api, approvals, dashboard, settings_api, admin_api, crm, hierarchy_api
 from app.api import users, attendance, tasks, salaries, auth, onboarding
 from app.db import init_db
 
@@ -60,6 +60,7 @@ app.include_router(dashboard.router, prefix="/api/v1/dashboard", tags=["dashboar
 app.include_router(settings_api.router, prefix="/api/v1/settings", tags=["settings"])
 app.include_router(admin_api.router, prefix="/api/v1/admin", tags=["admin"])
 app.include_router(crm.router, prefix="/api/v1/crm", tags=["crm"])
+app.include_router(hierarchy_api.router, prefix="/api/v1/hierarchy", tags=["hierarchy"])
 
 @app.get("/")
 async def root():

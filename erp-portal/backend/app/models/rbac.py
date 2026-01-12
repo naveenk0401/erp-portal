@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional, List
 from beanie import Document, Indexed, Link
 from pydantic import EmailStr, Field
@@ -10,16 +11,19 @@ class Scope(str, Enum):
 
 class RoleEnum(str, Enum):
     SUPER_ADMIN = "super_admin"
-    DEPT_ADMIN = "dept_admin"
-    MANAGER = "manager"
+    DEPARTMENT_HEAD = "department_head"
+    DEPARTMENT_MANAGER = "department_manager"
+    TEAM_LEAD = "team_lead"
     EMPLOYEE = "employee"
 
-class Department(str, Enum):
-    ACCOUNTANT = "accountant"
-    HR = "hr"
-    SOFTWARE = "software"
-    SALES = "sales"
-    ADMIN = "admin"
+class Department(Document):
+    name: Indexed(str, unique=True)
+    code: Indexed(str, unique=True)
+    description: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+    class Settings:
+        name = "departments"
 
 class Permission(Document):
     code: Indexed(str, unique=True) # e.g. salary.view

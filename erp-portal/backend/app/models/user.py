@@ -11,8 +11,9 @@ class User(Document):
     full_name: str
     hashed_password: str
     company: Optional[Link[Company]] = None
-    department: Optional[Department] = None
+    department: Optional[Link[Department]] = None
     role: Optional[RoleEnum] = RoleEnum.EMPLOYEE
+    reporting_to: Optional[Link["User"]] = None
     is_active: bool = True
     salary: float = 0.0
     status: str = "active" # active, on_leave, terminated
