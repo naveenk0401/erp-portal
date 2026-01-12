@@ -12,4 +12,6 @@ beanie
 bcrypt
 email-validator
 gunicorn
-fc
+reportlab
+pandas
+openpyxl
