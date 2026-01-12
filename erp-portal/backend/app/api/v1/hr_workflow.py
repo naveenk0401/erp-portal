@@ -40,8 +40,8 @@ async def start_onboarding(
     data: OnboardingCreate,
     current_user: User = Depends(get_current_user)
 ):
-    # Allowed for Dept Admin or Super Admin
-    if current_user.role not in [RoleEnum.SUPER_ADMIN, RoleEnum.DEPT_ADMIN]:
+    # Allowed for Dept Head or Super Admin
+    if current_user.role not in [RoleEnum.SUPER_ADMIN, RoleEnum.DEPARTMENT_HEAD]:
         raise HTTPException(status_code=403, detail="Insufficient permissions")
     return await hr_service.create_onboarding(current_user, data.dict())
 
@@ -71,12 +71,12 @@ async def approve_onboarding(
 async def get_pending_approvals(
     current_user: User = Depends(get_current_user)
 ):
-    if current_user.role not in [RoleEnum.SUPER_ADMIN, RoleEnum.DEPT_ADMIN]:
+    if current_user.role not in [RoleEnum.SUPER_ADMIN, RoleEnum.DEPARTMENT_HEAD]:
         raise HTTPException(status_code=403, detail="Insufficient permissions")
     
     query = {"status": OnboardingStatus.SUBMITTED}
-    if current_user.role == RoleEnum.DEPT_ADMIN:
-        # Filter by department head's department if we had a clean link, 
+    if current_user.role == RoleEnum.DEPARTMENT_HEAD:
+        # Filter by department head's department
         # for now we'll assume they see their dept's requests
         # (This is simplified as requested)
         pass
@@ -94,7 +94,7 @@ async def get_onboarding_details(
     
     # Masking logic
     data = req.dict()
-    if current_user.role not in [RoleEnum.SUPER_ADMIN, RoleEnum.DEPT_ADMIN]:
+    if current_user.role not in [RoleEnum.SUPER_ADMIN, RoleEnum.DEPARTMENT_HEAD]:
         # Mask sensitive data
         data["bank_details"] = {k: "***" for k in data["bank_details"]}
         if data.get("pf_details"):

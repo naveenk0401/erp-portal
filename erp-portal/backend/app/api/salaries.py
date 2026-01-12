@@ -15,11 +15,13 @@ async def create_salary_record(
     year: int,
     bonus: float = 0.0,
     deductions: float = 0.0,
-    current_user: User = Depends(check_role([RoleEnum.SUPER_ADMIN, RoleEnum.DEPT_ADMIN]))
+    current_user: User = Depends(check_role([RoleEnum.SUPER_ADMIN, RoleEnum.DEPARTMENT_HEAD]))
 ):
-    # Check if user is in Accountant dept or Super Admin
-    if current_user.role == RoleEnum.DEPT_ADMIN and current_user.department != Department.ACCOUNTANT:
-        raise HTTPException(status_code=403, detail="Only Accountant dept admin can create salary records")
+    # Check if user is in Finance dept or Super Admin
+    # For now, we'll fetch the linked department if it's a Link
+    dept = await current_user.department.fetch() if current_user.department else None
+    if current_user.role == RoleEnum.DEPARTMENT_HEAD and (not dept or dept.code != "FINANCE"):
+        raise HTTPException(status_code=403, detail="Only Finance dept head can create salary records")
 
     target_user = await User.get(user_id)
     if not target_user:
@@ -41,11 +43,12 @@ async def get_my_salary(current_user: User = Depends(get_current_user)):
     return await Salary.find(Salary.user.id == current_user.id).to_list()
 
 @router.get("/all")
-async def get_all_salaries(current_user: User = Depends(check_role([RoleEnum.SUPER_ADMIN, RoleEnum.DEPT_ADMIN]))):
+async def get_all_salaries(current_user: User = Depends(check_role([RoleEnum.SUPER_ADMIN, RoleEnum.DEPARTMENT_HEAD]))):
     if current_user.role == RoleEnum.SUPER_ADMIN:
         return await Salary.find_all(fetch_links=True).to_list()
     
-    if current_user.department != Department.ACCOUNTANT:
-         raise HTTPException(status_code=403, detail="Only Accountant dept admin can view all salaries")
+    dept = await current_user.department.fetch() if current_user.department else None
+    if not dept or dept.code != "FINANCE":
+         raise HTTPException(status_code=403, detail="Only Finance dept head can view all salaries")
 
     return await Salary.find_all(fetch_links=True).to_list()

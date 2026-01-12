@@ -30,13 +30,14 @@ async def get_my_attendance(current_user: User = Depends(get_current_user)):
 @router.get("/all", response_model=Dict[str, Any])
 async def get_all_attendance(
     current_user: User = Depends(get_current_user),
-    _ = Depends(check_role([RoleEnum.SUPER_ADMIN, RoleEnum.DEPT_ADMIN]))
+    _ = Depends(check_role([RoleEnum.SUPER_ADMIN, RoleEnum.DEPARTMENT_HEAD]))
 ):
     if current_user.role == RoleEnum.SUPER_ADMIN:
         records = await attendance_service.attendance_repo.find_all()
     else:
         # Filter by department
-        users_in_dept = await User.find(User.department == current_user.department).to_list()
+        dept_id = current_user.department.to_ref().id if current_user.department else None
+        users_in_dept = await User.find(User.department.id == dept_id).to_list()
         user_ids = [str(u.id) for u in users_in_dept]
         records = await attendance_service.attendance_repo.find_many({"user.$id": {"$in": user_ids}})
     

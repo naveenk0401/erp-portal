@@ -10,11 +10,20 @@ class Scope(str, Enum):
     SELF = "SELF"
 
 class RoleEnum(str, Enum):
+    # Standard Hierarchical Roles
     SUPER_ADMIN = "super_admin"
     DEPARTMENT_HEAD = "department_head"
     DEPARTMENT_MANAGER = "department_manager"
     TEAM_LEAD = "team_lead"
     EMPLOYEE = "employee"
+    
+    # Legacy / Specialized Roles (for compatibility)
+    ADMIN = "admin"
+    HR = "hr"
+    ACCOUNTANT = "accountant"
+    FINANCE = "finance"
+    DEPT_ADMIN = "dept_admin"
+    MANAGER = "manager"
 
 class Department(Document):
     name: Indexed(str, unique=True)
