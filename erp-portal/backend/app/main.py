@@ -23,9 +23,11 @@ app.add_exception_handler(ERPBaseException, erp_exception_handler)
 app.add_exception_handler(Exception, generic_exception_handler)
 
 # CORS Middleware - MUST be added before routers
+origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",")] if settings.ALLOWED_ORIGINS else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
