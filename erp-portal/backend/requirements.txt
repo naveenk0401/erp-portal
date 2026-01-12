@@ -12,3 +12,4 @@ beanie
 bcrypt
 email-validator
 gunicorn
+fc
