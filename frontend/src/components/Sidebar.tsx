@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, Users, CreditCard, LogOut, Building, 
   Settings as SettingsIcon, Shield, Package, UserSquare, 
-  BaggageClaim, Layers, Percent, ClipboardList 
+  BaggageClaim, Layers, Percent, ClipboardList, Activity 
 } from 'lucide-react';
 import { clearTokens } from '@/lib/auth';
 import { usePermissions } from '@/lib/permissions';
@@ -49,20 +49,20 @@ export default function Sidebar() {
         <span className="font-bold text-xl tracking-tight text-white">ERP Portal</span>
       </div>
 
-      <nav className="flex-1 space-y-2">
+      <nav className="flex-1 space-y-2 overflow-y-auto">
         {filteredNavItems.map((item) => {
           const isActive = pathname === item.path;
           return (
             <button
               key={item.name}
               onClick={() => item.path && router.push(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all whitespace-nowrap ${
                 isActive 
                   ? 'bg-emerald-500/10 text-emerald-400' 
                   : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
               }`}
             >
-              <item.icon size={20} />
+              <item.icon size={20} className="flex-shrink-0" />
               <span className="font-medium">{item.name}</span>
             </button>
           );

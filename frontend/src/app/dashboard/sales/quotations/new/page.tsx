@@ -198,40 +198,73 @@ export default function NewQuotationPage() {
 
                 <div className="space-y-4">
                   {formData.items.map((item, index) => (
-                    <div key={index} className="grid grid-cols-12 gap-3 p-4 bg-slate-950/40 rounded-2xl border border-slate-800/40 relative group">
-                      <div className="col-span-12 md:col-span-5">
-                         <select 
-                           value={item.item_id}
-                           onChange={(e) => updateItem(index, 'item_id', e.target.value)}
-                           className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm"
-                         >
-                           <option value="">Select Item</option>
-                           {items.map(i => <option key={i._id} value={i._id}>{i.name}</option>)}
-                         </select>
+                    <div key={index} className="p-4 bg-slate-950/40 rounded-2xl border border-slate-800/40 relative group space-y-3">
+                      <div className="grid grid-cols-12 gap-3">
+                        <div className="col-span-12 md:col-span-5">
+                           <select 
+                             value={item.item_id}
+                             onChange={(e) => updateItem(index, 'item_id', e.target.value)}
+                             className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm"
+                           >
+                             <option value="">Select Item</option>
+                             {items.map(i => <option key={i._id} value={i._id}>{i.name}</option>)}
+                           </select>
+                        </div>
+                        <div className="col-span-4 md:col-span-2">
+                           <input 
+                             type="number" placeholder="Qty"
+                             value={item.qty}
+                             onChange={(e) => updateItem(index, 'qty', Number(e.target.value))}
+                             className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm"
+                           />
+                        </div>
+                        <div className="col-span-5 md:col-span-3">
+                           <input 
+                             type="number" placeholder="Price"
+                             value={item.price}
+                             onChange={(e) => updateItem(index, 'price', Number(e.target.value))}
+                             className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm"
+                           />
+                        </div>
+                        <div className="col-span-3 md:col-span-2 flex items-center justify-end">
+                           <button 
+                             type="button" onClick={() => removeItem(index)}
+                             className="p-2 text-slate-600 hover:text-red-500 transition-colors"
+                           >
+                             <Trash2 className="w-4 h-4" />
+                           </button>
+                        </div>
                       </div>
-                      <div className="col-span-4 md:col-span-2">
-                         <input 
-                           type="number" placeholder="Qty"
-                           value={item.qty}
-                           onChange={(e) => updateItem(index, 'qty', Number(e.target.value))}
-                           className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm"
-                         />
-                      </div>
-                      <div className="col-span-5 md:col-span-3">
-                         <input 
-                           type="number" placeholder="Price"
-                           value={item.price}
-                           onChange={(e) => updateItem(index, 'price', Number(e.target.value))}
-                           className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm"
-                         />
-                      </div>
-                      <div className="col-span-3 md:col-span-2 flex items-center justify-end">
-                         <button 
-                           type="button" onClick={() => removeItem(index)}
-                           className="p-2 text-slate-600 hover:text-red-500 transition-colors"
-                         >
-                           <Trash2 className="w-4 h-4" />
-                         </button>
+                      
+                      {/* Tax Selection */}
+                      <div className="grid grid-cols-12 gap-3">
+                        <div className="col-span-12">
+                          <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">
+                            Taxes
+                          </label>
+                          <div className="flex flex-wrap gap-2">
+                            {taxes.map(tax => (
+                              <label 
+                                key={tax._id}
+                                className="flex items-center gap-2 px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm text-white hover:border-emerald-500/30 cursor-pointer transition-all"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={item.tax_ids.includes(tax._id)}
+                                  onChange={(e) => {
+                                    const newTaxIds = e.target.checked
+                                      ? [...item.tax_ids, tax._id]
+                                      : item.tax_ids.filter(id => id !== tax._id);
+                                    updateItem(index, 'tax_ids', newTaxIds);
+                                  }}
+                                  className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-emerald-500 focus:ring-emerald-500/40"
+                                />
+                                <span className="font-medium">{tax.name}</span>
+                                <span className="text-xs text-slate-500">({tax.rate}%)</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}

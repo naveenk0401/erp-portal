@@ -25,6 +25,7 @@ export interface Quotation {
   grand_total: number;
   status: string;
   valid_until?: string;
+  notes?: string;
   created_at: string;
 }
 
