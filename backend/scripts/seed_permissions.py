@@ -25,6 +25,14 @@ INITIAL_PERMISSIONS = [
     {"key": "finance.approve", "module": "finance", "action": "approve", "description": "Approve financial transactions"},
     {"key": "roles.view", "module": "roles", "action": "view", "description": "View company roles"},
     {"key": "roles.manage", "module": "roles", "action": "manage", "description": "Create, edit, or delete company roles"},
+    # Sales Module Permissions
+    {"key": "sales.quote.view", "module": "sales", "action": "view_quote", "description": "View quotations"},
+    {"key": "sales.quote.create", "module": "sales", "action": "create_quote", "description": "Create quotations"},
+    {"key": "sales.order.view", "module": "sales", "action": "view_order", "description": "View sales orders"},
+    {"key": "sales.order.create", "module": "sales", "action": "create_order", "description": "Create sales orders"},
+    {"key": "sales.invoice.view", "module": "sales", "action": "view_invoice", "description": "View invoices"},
+    {"key": "sales.invoice.issue", "module": "sales", "action": "issue_invoice", "description": "Issue invoices"},
+    {"key": "sales.credit_note.create", "module": "sales", "action": "create_credit_note", "description": "Create credit notes"},
 ]
 
 async def seed_permissions():

@@ -30,6 +30,9 @@ export default function Sidebar() {
     { name: 'Categories', icon: Layers, path: '/dashboard/masters/categories', requiredPermission: 'categories.view' },
     { name: 'Taxes', icon: Percent, path: '/dashboard/masters/taxes', requiredPermission: 'taxes.view' },
     { name: 'Price Lists', icon: ClipboardList, path: '/dashboard/masters/price-lists', requiredPermission: 'price_lists.view' },
+    { name: 'Quotations', icon: ClipboardList, path: '/dashboard/sales/quotations', requiredPermission: 'sales.quote.view' },
+    { name: 'Sales Orders', icon: Activity, path: '/dashboard/sales/orders', requiredPermission: 'sales.order.view' },
+    { name: 'Invoices', icon: CreditCard, path: '/dashboard/sales/invoices', requiredPermission: 'sales.invoice.view' },
     { name: 'Settings', icon: SettingsIcon },
   ];
 

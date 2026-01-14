@@ -18,6 +18,9 @@ from .api.categories import router as categories_router
 from .api.taxes import router as taxes_router
 from .api.price_lists import router as price_lists_router
 from .api.dashboard import router as dashboard_router
+from .api.quotations import router as quotations_router
+from .api.sales_orders import router as sales_orders_router
+from .api.invoices import router as invoices_router
 from .models.permission import Permission
 from .models.role import Role
 from .models.customer import Customer
@@ -26,6 +29,8 @@ from .models.item import Item
 from .models.category import ItemCategory
 from .models.tax import Tax
 from .models.price_list import PriceList
+from .models.sequence import Sequence
+from .models.sales import Quotation, SalesOrder, Invoice, CreditNote
 from .core.middleware import AuthMiddleware
 
 app = FastAPI(title=settings.PROJECT_NAME)
@@ -47,7 +52,8 @@ async def startup_event():
         database=client[settings.DATABASE_NAME],
         document_models=[
             User, Company, FileMetadata, Permission, Role,
-            Customer, Vendor, Item, ItemCategory, Tax, PriceList
+            Customer, Vendor, Item, ItemCategory, Tax, PriceList,
+            Sequence, Quotation, SalesOrder, Invoice, CreditNote
         ]
     )
 
@@ -64,6 +70,9 @@ api_router.include_router(categories_router, prefix="/categories", tags=["catego
 api_router.include_router(taxes_router, prefix="/taxes", tags=["taxes"])
 api_router.include_router(price_lists_router, prefix="/price-lists", tags=["price-lists"])
 api_router.include_router(dashboard_router, prefix="/dashboard", tags=["dashboard"])
+api_router.include_router(quotations_router, prefix="/quotations", tags=["sales-quotations"])
+api_router.include_router(sales_orders_router, prefix="/sales-orders", tags=["sales-orders"])
+api_router.include_router(invoices_router, prefix="/invoices", tags=["sales-invoices"])
 
 app.include_router(api_router, prefix="/api/v1")
 
