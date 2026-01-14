@@ -1,0 +1,30 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+.DS_Store
+
+# Logs
+*.log
+server_log.txt
+server_log_2.txt
+debug_log.txt
+
+# Temp
+simulate_validation.py
+debug_beanie.py
+debug_beanie_2.py
+debug_imports.py
+diagnose_error.py
