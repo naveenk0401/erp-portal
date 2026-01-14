@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0f172a; /* Slate 900 */
+  --secondary: #2563eb; /* Blue 600 */
+  --accent: #f8fafc; /* Slate 50 */
+}
+
+body {
+  @apply bg-[#f8fafc] text-slate-900;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all active:scale-95;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-slate-200 p-6;
+}
